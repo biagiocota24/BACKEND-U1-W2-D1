@@ -11,4 +11,12 @@ public class ContoOnline extends ContoCorrente {
     public void stamaSaldo() {
         System.out.println("Titolare: " + getTitolare() + "- Saldo: " + getSaldo() + " nMovimenti: " + getnMovimenti() + " - Massimo movimenti: " + getMaxMovimenti() + " -Massimo prelievo possibile: " + maxPrelievo);
     }
+
+    @Override
+    public void preleva(double x) throws BancaException {
+        if (x > maxPrelievo) {
+            throw new BancaException("Il prelievo non è disponibile");
+        }
+        super.preleva(x);
+    }
 }

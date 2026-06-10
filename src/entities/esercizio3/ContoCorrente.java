@@ -28,10 +28,16 @@ public class ContoCorrente {
         this.nMovimenti = 0;
     }
 
-    public void preleva(double x) {
-        if (nMovimenti < maxMovimenti) saldo = saldo - x;
-        else saldo = saldo - x - 0 - 50;
+    public void preleva(double x) throws BancaException {
+        if (nMovimenti < maxMovimenti) {
+            saldo = saldo - x;
+        } else saldo = saldo - x - 0.50;
         nMovimenti++;
+        System.out.println("Hai prelevato: " + x + "€");
+        System.out.println("Il tuo saldo attuale è: " + saldo + "€");
+        if (saldo < 0) {
+            throw new BancaException("Conto in rosso" + getSaldo());
+        }
     }
 
     public double restituisciSaldo() {
